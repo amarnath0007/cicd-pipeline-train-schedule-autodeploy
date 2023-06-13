@@ -4,10 +4,14 @@ pipeline {
         //be sure to replace "bhavukm" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "bhavukm/train-schedule"
     }
+    tools {
+        nodejs 'Node' // Name of the Node.js installation defined in Jenkins
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Running build automation'
+                tool 'Node'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
